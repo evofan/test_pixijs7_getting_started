@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://pixijs.download/release/pixi.js"></script>
+</head>
+
+<body>
+
+    <!-- <h1>こんにちは、PixiJS</h1> -->
+
+    <script>
+
+        // PIXI.Applicationインスタンスを作成
+        let app = new PIXI.Application({ width: 640, height: 360 });
+
+        // PIXI.Applicationが描画するCanvasをhtml内に追加
+        document.body.appendChild(app.view);
+
+        // 魔法のようにPNGを非同期でロードします
+        let sprite = PIXI.Sprite.from('sample.png');
+
+        // ステージに読み込んだpng（sprite化）を表示する
+        app.stage.addChild(sprite);
+
+        // デモが実行されている秒数をカウントするための変数を追加します
+        let elapsed = 0.0;
+        // アプリケーションのティッカーに、フレームごとに新しいコールバックを実行するように指示し、
+        // 最後のティックからの経過時間
+        app.ticker.add((delta) => {
+            // 合計経過時間に時間を加算します
+            elapsed += delta;
+            // 経過時間のコサインに基づいてスプライトの X 位置を更新します。 分けます
+            // アニメーションを少し遅くするために 50 ずつ...
+            sprite.x = 100.0 + Math.cos(elapsed / 50.0) * 100.0;
+        });
+
+    </script>
+
+</body>
+
+</html>
